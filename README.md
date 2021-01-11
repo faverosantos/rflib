@@ -1,2 +1,2 @@
 # rflib
-A support package for RF applications
+A Python package to support RF applications

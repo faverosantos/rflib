@@ -56,7 +56,7 @@ def rad_to_degree(rad):
 def calc_rms_val(data):
     squaredVals = np.square(data)
     sumSquaredVals = np.sum(squaredVals)
-    meanSumSquaredVals = sumSquaredVals / len(self.rawData)
+    meanSumSquaredVals = sumSquaredVals / len(data)
     rmsVal = np.sqrt(meanSumSquaredVals)
     return rmsVal
 

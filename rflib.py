@@ -53,6 +53,12 @@ def rad_to_degree(rad):
     degree = rad * (180 / np.pi)
     return degree
 
+def calc_rms_val(data):
+    squaredVals = np.square(data)
+    sumSquaredVals = np.sum(squaredVals)
+    meanSumSquaredVals = sumSquaredVals / len(self.rawData)
+    rmsVal = np.sqrt(meanSumSquaredVals)
+    return rmsVal
 
 def polar_to_complex(mag, angle):
     if -2 * np.pi <= angle <= 2 * np.pi:

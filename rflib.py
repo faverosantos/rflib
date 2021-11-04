@@ -53,12 +53,24 @@ def rad_to_degree(rad):
     degree = rad * (180 / np.pi)
     return degree
 
-def calc_rms_val(data):
-    squaredVals = np.square(data)
-    sumSquaredVals = np.sum(squaredVals)
-    meanSumSquaredVals = sumSquaredVals / len(data)
-    rmsVal = np.sqrt(meanSumSquaredVals)
-    return rmsVal
+def evalRMS(data):
+    sqrVal = np.square(data)
+    sum_sqrVal = np.sum(sqrVal)
+    mean_sum_sqrVal = sum_sqrVal / len(data)
+    rms = np.sqrt(mean_sum_sqrVal)
+    return rms
+
+def evalP2P(data):
+    p2p = np.max(data) + np.abs(np.min(data))
+    return p2p
+
+def evalPSD(data):
+    absVal = np.abs(data)
+    sqr_absVal = np.square(absVal)
+    sum_sqr_absVal = np.sum(sqr_absVal)
+    mean_sum_sqr_absVal = sum_sqr_absVal / len(data)
+    psd = np.log10(mean_sum_sqr_absVal)
+    return psd
 
 def polar_to_complex(mag, angle):
     if -2 * np.pi <= angle <= 2 * np.pi:
@@ -91,6 +103,12 @@ def mW_2_dBm(mw):
 def dBm_2_mW(dBm):
     return 10 ** (dBm / 10)
 
+def fftOf(samplesNumber, samplingFrequency, signal):
+    timeStep = 1 / samplingFrequency
+    #x = np.linspace(0.0, samplesNumber*timeStep, len(signal))
+    y_f = np.fft.fft(signal)
+    #x_f = np.linspace(0.0, 1.0/(2.0*timeStep), samplesNumber//2)
+    return y_f
 
 def compute_optimal_impedances(S):
     deltaS = S[0, 0] * S[1, 1] - S[0, 1] * S[1, 0]
